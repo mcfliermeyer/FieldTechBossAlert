@@ -7,23 +7,56 @@
     <link href="../dist/output.css" rel="stylesheet" />
     <title>Potts Locator</title>
   </head>
-  <body class="h-screen font-robot bg-popcorn-beige">
-    <div class="flex justify-center items-center w-full h-60 bg-popcorn-red">
-      <h1
-        class="text-popcorn-beige text-4xl font-bold tracking-wide place-content-center"
-      >
+  <body class="h-screen font-robot">
+    <header class="w-full h-80 bg-popcorn-red">
+      <h1 class="text-center pt-20 text-popcorn-beige text-4xl font-bold">
         Potts Spotter
       </h1>
-    </div>
-    <div class="w-full h-full bg-popcorn-dark-beige flex justify-center">
-      <div class="w-60 mt-20">
-        <img
-          class="w-full rounded-full"
-          src="./img/PottsProfileLinkedIn.webp"
-          alt="Large hunk of a man. Likely to be seen wrestling big foot."
-        />
+    </header>
+
+    <section class="w-full h-full bg-popcorn-dark-beige">
+      <div class="w-[350px] mx-auto h-[400px] bg-popcorn-beige relative">
+        <svg
+          class="absolute top-[-85px] left-[0px]"
+          viewBox="-15 -15 130 130"
+          height="300"
+          width="350"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="50" cy="50" r="65" fill="#f5f3e2" />
+          <text
+            style="
+              fill: #a0512d;
+              font-family: Inter, Roboto, Arial, sans-serif;
+              font-weight: bold;
+              font-size: 13px;
+            "
+          >
+            <textPath xlink:href="#top-arc-text">
+              Prowlin Potts Spotter
+            </textPath>
+          </text>
+          <image
+            href="./img/PottsProfileLinkedIn.webp"
+            height="110"
+            width="110"
+            clip-path="url(#pfp-clip)"
+          />
+        </svg>
       </div>
-    </div>
+    </section>
     <script src="index.js"></script>
   </body>
 </html>
+<svg>
+  <clipPath id="pfp-clip">
+    <circle cx="50" cy="50" r="50" />
+  </clipPath>
+  <path
+    id="top-arc-text"
+    d="
+          M 2,34.5
+          a 9,6.9 0 1,1 96,0  
+        "
+  />
+</svg>
