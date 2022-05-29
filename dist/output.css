@@ -484,6 +484,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   left: 0px;
 }
 
+.bottom-5 {
+  bottom: 1.25rem;
+}
+
+.left-5 {
+  left: 1.25rem;
+}
+
+.right-5 {
+  right: 1.25rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -513,6 +525,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 350px;
 }
 
+.rounded-full {
+  border-radius: 9999px;
+}
+
 .bg-popcorn-red {
   --tw-bg-opacity: 1;
   background-color: rgb(149 51 0 / var(--tw-bg-opacity));
@@ -528,6 +544,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(245 243 226 / var(--tw-bg-opacity));
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
 .pt-20 {
   padding-top: 5rem;
 }
@@ -539,6 +559,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 
 .font-bold {
