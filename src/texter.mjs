@@ -4,12 +4,20 @@ import express from "express";
 import twilio from "twilio";
 import path from "path";
 
+const __dirname = path.dirname(
+  "/Users/markmeyer/code/FieldTechBossAlert/dist/output.css"
+);
+const img__dirname = path.dirname(
+  "/Users/markmeyer/code/FieldTechBossAlert/src/img/PottsProfileLinkedIn.webp"
+);
+
+
 const app = express();
 const port = 3001;
 
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_AUTH_TOKEN;
-const client = twilio(accountSid, authToken);
+// const accountSid = process.env.TWILIO_ACCOUNT_SID;
+// const authToken = process.env.TWILIO_AUTH_TOKEN;
+// const client = twilio(accountSid, authToken);
 
 //sending a message to my phone from twilio
 // client.messages
@@ -20,8 +28,12 @@ const client = twilio(accountSid, authToken);
 //   })
 //   .then((message) => console.log(message.sid));
 
+app.use(express.static(__dirname));
+app.use(express.static(img__dirname));
+
 app.get("/", (req, res) => {
-  res.send("<h1>Henlo</h1>");
+  //serves html file to client
+  res.sendFile("/index.html", { root: "./src" });
 });
 
 app.listen(port, () => {

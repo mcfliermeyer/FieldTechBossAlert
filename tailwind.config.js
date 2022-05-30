@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["./src/**/*.{html,js}"],
+  content: ["/Users/markmeyer/code/FieldTechBossAlert/src/**/*.{html,js,cjs}"],
   theme: {
     extend: {
       fontFamily: {

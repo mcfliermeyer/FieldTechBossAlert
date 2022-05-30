@@ -1,4 +1,4 @@
-import { getGeocodeKey } from "../apiInfo.js";
+import { getGeocodeKey } from "/apiInfo.js";
 let lat;
 let long;
 const key = getGeocodeKey();
