@@ -10,8 +10,6 @@ trackBtn.addEventListener("click", async () => {
       })
     }
     const position = await getPosition()
-    console.log("async coords --->")
-    console.log(position.coords)
     return position.coords
   }
 
@@ -28,14 +26,11 @@ trackBtn.addEventListener("click", async () => {
       `https://api.opencagedata.com/geocode/v1/json?q=${loc.latitude}%2C%20${loc.longitude}&key=${geocodeKey}&language=en&pretty=1`
     );
     const geoLoc = await geoLocResponse.json();
-    console.log(geoLoc);
     return geoLoc.results[0];
   }
 
   async function chained() {
     const geo = await geoInfo();
-    console.log(`in chained geo:`);
-    console.log(geo);
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
