@@ -14,6 +14,7 @@ let locationOfPotts;
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
+const geocode = process.env.GEOCODE_KEY;
 const __dirname = path.dirname(
   "/Users/markmeyer/code/FieldTechBossAlert/dist/output.css"
 );
@@ -25,14 +26,21 @@ const app = express();
 const port = 3001;
 
 app.use(express.json({ limit: "5mb" }));
+app.get("/geocode", (req, res) => {
+  res.send({geocode: geocode})
+})
 app.post("/location", (req, res) => {
   console.log(req.body.geo);
   locationOfPotts = req.body.geo;
-  const formatted = locationOfPotts.formatted
-  const neighborhood = locationOfPotts.components.neighbourhood.toUpperCase()
-  console.log(formatted)
-  console.log(neighborhood)
-  sendText(`Potts is around:\n${formatted} \nAround the area of ${neighborhood}`);
+  const formatted = locationOfPotts.formatted;
+  const neighborhood = locationOfPotts.components.neighbourhood
+    ? `\nAround the area of ${locationOfPotts.components.neighbourhood.toUpperCase()}`
+    : "";
+  console.log(formatted);
+  console.log(neighborhood);
+  sendText(
+    `Sasquatch spotted around:\n${formatted} ${neighborhood}`
+  );
 });
 
 function sendText(text) {

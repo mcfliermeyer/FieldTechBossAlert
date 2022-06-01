@@ -1,35 +1,31 @@
-import { getGeocodeKey } from "/apiInfo.js"; //todo switch this over to evn variables
-let lat;
-let long;
-const key = getGeocodeKey();
-let locationData;
-
-navigator.geolocation.getCurrentPosition(
-  (pos) => {
-    console.log(pos.coords);
-    const coords = pos.coords;
-    lat = coords.latitude;
-    long = coords.longitude;
-  },
-  () => err
-);
-
-function err(err) {
-  console.log("error getting position info" + err);
-}
-
 const trackBtn = document.getElementById("track-btn");
+
 trackBtn.addEventListener("click", async () => {
-  // const geoLocResponse = await fetch(
-  //   `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C%20${long}&key=${key}&language=en&pretty=1`
-  // );
-  // const geoLoc = await geoLocResponse.json();
-  // console.log(geoLoc.results[0].formatted);
-  // locationData = geoLoc.results[0].formatted;
+
+  async function getCurrentLocation() {
+
+    function getPosition() {
+      return new Promise((pos) => {
+        navigator.geolocation.getCurrentPosition((pos))
+      })
+    }
+    const position = await getPosition()
+    console.log("async coords --->")
+    console.log(position.coords)
+    return position.coords
+  }
+
+  async function getGeocodeKey() {
+    const res = await fetch(`http://localhost:3001/geocode`);
+    const key = await res.json()
+    return key.geocode
+  }
 
   async function geoInfo() {
+    const geocodeKey = await getGeocodeKey()
+    const loc = await getCurrentLocation()
     const geoLocResponse = await fetch(
-      `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C%20${long}&key=${key}&language=en&pretty=1`
+      `https://api.opencagedata.com/geocode/v1/json?q=${loc.latitude}%2C%20${loc.longitude}&key=${geocodeKey}&language=en&pretty=1`
     );
     const geoLoc = await geoLocResponse.json();
     console.log(geoLoc);
@@ -45,9 +41,8 @@ trackBtn.addEventListener("click", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ geo }),
     };
-    const apiReq = await fetch("http://localhost:3001/location", options);
-    const apiRes = await apiReq.json();
-    console.log(apiRes);
+    //const apiReq = await fetch("http://localhost:3001/location", options);//send command to text
+    //const apiRes = await apiReq.json();
   }
   chained();
 });
