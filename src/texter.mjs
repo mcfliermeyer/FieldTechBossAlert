@@ -1,26 +1,44 @@
 /////////////////////node, express, and twilio things
-import dotenv from "dotenv/config"; //keep in order to load env variables
+import dotenv from "dotenv"; //keep in order to load env variables
 import express from "express";
 import twilio from "twilio";
 import path from "path";
+dotenv.config({
+  path: path.resolve(
+    "/Users/markmeyer/code/FieldTechBossAlert/src/.env",
+    "../.env"
+  ),
+});
 
+let locationOfPotts;
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 const __dirname = path.dirname(
   "/Users/markmeyer/code/FieldTechBossAlert/dist/output.css"
 );
 const img__dirname = path.dirname(
   "/Users/markmeyer/code/FieldTechBossAlert/src/img/PottsProfileLinkedIn.webp"
 );
+const client = twilio(accountSid, authToken);
 const app = express();
 const port = 3001;
 
-function sendText() {
-  const accountSid = process.env.TWILIO_ACCOUNT_SID;
-  const authToken = process.env.TWILIO_AUTH_TOKEN;
-  const client = twilio(accountSid, authToken);
+app.use(express.json({ limit: "5mb" }));
+app.post("/location", (req, res) => {
+  console.log(req.body.geo);
+  locationOfPotts = req.body.geo;
+  const formatted = locationOfPotts.formatted
+  const neighborhood = locationOfPotts.components.neighbourhood.toUpperCase()
+  console.log(formatted)
+  console.log(neighborhood)
+  sendText(`Potts is around:\n${formatted} \nAround the area of ${neighborhood}`);
+});
 
+function sendText(text) {
   client.messages
     .create({
-      body: "This is the ship that made the Kessel Run in fourteen parsecs?",
+      body: text,
       from: "+19285855151",
       to: "+13307807602",
     })
@@ -40,4 +58,4 @@ function loadPageAndResources() {
   });
 }
 
-loadPageAndResources()
+loadPageAndResources();

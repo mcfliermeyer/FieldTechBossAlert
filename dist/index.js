@@ -1,7 +1,8 @@
-import { getGeocodeKey } from "/apiInfo.js";
+import { getGeocodeKey } from "/apiInfo.js"; //todo switch this over to evn variables
 let lat;
 let long;
 const key = getGeocodeKey();
+let locationData;
 
 navigator.geolocation.getCurrentPosition(
   (pos) => {
@@ -18,10 +19,35 @@ function err(err) {
 }
 
 const trackBtn = document.getElementById("track-btn");
-trackBtn.addEventListener("click", () => {
-  fetch(
-    `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C%20${long}&key=${key}&language=en&pretty=1`
-  )
-    .then((res) => res.json())
-    .then((data) => console.log(data));
+trackBtn.addEventListener("click", async () => {
+  // const geoLocResponse = await fetch(
+  //   `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C%20${long}&key=${key}&language=en&pretty=1`
+  // );
+  // const geoLoc = await geoLocResponse.json();
+  // console.log(geoLoc.results[0].formatted);
+  // locationData = geoLoc.results[0].formatted;
+
+  async function geoInfo() {
+    const geoLocResponse = await fetch(
+      `https://api.opencagedata.com/geocode/v1/json?q=${lat}%2C%20${long}&key=${key}&language=en&pretty=1`
+    );
+    const geoLoc = await geoLocResponse.json();
+    console.log(geoLoc);
+    return geoLoc.results[0];
+  }
+
+  async function chained() {
+    const geo = await geoInfo();
+    console.log(`in chained geo:`);
+    console.log(geo);
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ geo }),
+    };
+    const apiReq = await fetch("http://localhost:3001/location", options);
+    const apiRes = await apiReq.json();
+    console.log(apiRes);
+  }
+  chained();
 });
