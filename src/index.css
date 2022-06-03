@@ -7,8 +7,7 @@
   margin: 0;
   padding: 0;
 }
-html,
-body {
-  background: url("img/green-dust-and-scratches.png"), #e6c99f;
-  background-size: 20%;
+
+.st0 {
+  fill: none;
 }
