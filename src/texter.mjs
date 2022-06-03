@@ -19,7 +19,7 @@ const __dirname = path.dirname(
   "/Users/markmeyer/code/FieldTechBossAlert/dist/output.css"
 );
 const img__dirname = path.dirname(
-  "/Users/markmeyer/code/FieldTechBossAlert/src/img/PottsProfileLinkedIn.webp"
+  "/Users/markmeyer/code/FieldTechBossAlert/dist/img/PottsProfileLinkedIn.webp"
 );
 const client = twilio(accountSid, authToken);
 const app = express();
@@ -53,7 +53,7 @@ function loadPageAndResources() {
   app.use(express.static(img__dirname)); //serves img folder
 
   app.get("/", (req, res) => {
-    res.sendFile("/index.html", { root: "./src" }); //serves html file to client
+    res.sendFile("/index.html", { root: "./dist" }); //serves html file to client
   });
 
   app.listen(port, () => {

@@ -5,17 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="output.css" rel="stylesheet" />
-    <title>Potts Locator</title>
+    <title>Sasquatch Spotter</title>
   </head>
-  <body class="h-screen font-robot">
-    <header class="w-full h-80 bg-popcorn-red">
-      <h1 class="text-center pt-20 text-popcorn-beige text-4xl font-bold">
-        Potts Spotter
+  <body class="min-h-full font-robot bg-popcorn-dark-beige bg-[length:300px_300px] bg-[url("img/green-dust-and-scratches.png")]>
+    <header class="w-full h-60 bg-popcorn-red">
+      <h1 class="text-center pt-12 text-popcorn-beige text-4xl font-bold">
+        Sasquatch Spotter
       </h1>
     </header>
 
-    <section class="w-full h-full bg-popcorn-dark-beige">
-      <div class="w-[350px] mx-auto h-[400px] bg-popcorn-beige relative">
+    <section class="w-full h-full">
+      <div class="w-[350px] mx-auto h-[400px] bg-popcorn-beige relative shadow-lg border-2 border-stone-300">
         <svg
           class="absolute top-[-85px] left-[0px]"
           viewBox="-15 -15 130 130"
@@ -32,37 +32,41 @@
               font-size: 13px;
             "
           >
-            <textPath xlink:href="#top-arc-text">
-              Prowlin Potts Spotterrrr
-            </textPath>
+            <textPath href="#top-arc-text">&nbsp;&nbsp;Sasquatch Spotter</textPath>
           </text>
           <image
-            href="PottsProfileLinkedIn.webp"
-            height="110"
-            width="110"
-            clip-path="url(#pfp-clip)"
+            href="./img/sasquatch.webp"
+            height="120"
+            width="125"
+            x="-12"
+            y="0"
           />
         </svg>
         <button
           id="track-btn"
-          class="absolute bottom-5 left-5 right-5 rounded-full p-10 bg-popcorn-red text-popcorn-beige text-3xl"
+          class="absolute right-5 bottom-5 left-5 rounded-full p-10 bg-popcorn-red bg-[url('./img/cream-dust.png')] bg-[length:80px_80px] text-popcorn-beige text-1xl"
         >
-          Track Potts
+          Send Sasquatch's Location
         </button>
       </div>
     </section>
+    <div>
     <script type="module" src="index.js"></script>
   </body>
 </html>
 <svg>
-  <clipPath id="pfp-clip">
-    <circle cx="50" cy="50" r="50" />
-  </clipPath>
-  <path
-    id="top-arc-text"
-    d="
+  <symbol>
+    <clipPath id="pfp-clip">
+      <circle cx="50" cy="50" r="50" />
+    </clipPath>
+  </symbol>
+  <symbol>
+    <path
+      id="top-arc-text"
+      d="
           M 2,34.5
           a 9,6.9 0 1,1 96,0  
         "
-  />
+    />
+  </symbol>
 </svg>

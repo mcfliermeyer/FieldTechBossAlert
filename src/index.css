@@ -9,6 +9,6 @@
 }
 html,
 body {
-  min-height: 100%;
-  color: #000;
+  background: url("img/green-dust-and-scratches.png"), #e6c99f;
+  background-size: 20%;
 }

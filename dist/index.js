@@ -36,8 +36,8 @@ trackBtn.addEventListener("click", async () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ geo }),
     };
-    //const apiReq = await fetch("http://localhost:3001/location", options);//send command to text
-    //const apiRes = await apiReq.json();
+    const apiReq = await fetch("http://localhost:3001/location", options);//send command to text
+    const apiRes = await apiReq.json();
   }
   chained();
 });

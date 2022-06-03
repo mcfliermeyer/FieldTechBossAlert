@@ -1,5 +1,5 @@
 module.exports = {
-  content: ["/Users/markmeyer/code/FieldTechBossAlert/src/**/*.{html,js,cjs}"],
+  content: ["/Users/markmeyer/code/FieldTechBossAlert/dist/**/*.{html,js,cjs}"],
   theme: {
     extend: {
       fontFamily: {
@@ -23,7 +23,7 @@ module.exports = {
       colors: {
         "popcorn-red": "#953300",
         "popcorn-beige": "#f5f3e2",
-        "popcorn-dark-beige": "#e5d9c9",
+        "popcorn-dark-beige": "#e6c99f;",
         "popcorn-button-red": "#a0512d",
         "popcorn-accent-red": "#c7754c",
       },
