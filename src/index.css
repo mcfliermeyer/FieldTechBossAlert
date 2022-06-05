@@ -11,3 +11,11 @@
 .st0 {
   fill: none;
 }
+
+button:disabled {
+  background-color: slategray;
+  color: crimson;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-image: none;
+}

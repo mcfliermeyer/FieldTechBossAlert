@@ -3,6 +3,7 @@ import dotenv from "dotenv"; //keep in order to load env variables
 import express from "express";
 import twilio from "twilio";
 import path from "path";
+import fetch from "node-fetch";
 dotenv.config({
   path: path.resolve(
     "/Users/markmeyer/code/FieldTechBossAlert/src/.env",
@@ -10,11 +11,11 @@ dotenv.config({
   ),
 });
 
-let locationOfPotts;
+let textBody = "";
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
-const geocode = process.env.GEOCODE_KEY;
+const geocodeKey = process.env.GEOCODE_KEY;
 const __dirname = path.dirname(
   "/Users/markmeyer/code/FieldTechBossAlert/dist/output.css"
 );
@@ -26,17 +27,29 @@ const app = express();
 const port = 3001;
 
 app.use(express.json({ limit: "5mb" }));
-app.get("/geocode", (req, res) => {
-  res.send({ geocode: geocode });
-});
-app.post("/location", (req, res) => {
-  locationOfPotts = req.body.geo;
-  const formatted = locationOfPotts.formatted;
-  const neighborhood = locationOfPotts.components.neighbourhood
-    ? `\nAround the area of ${locationOfPotts.components.neighbourhood.toUpperCase()}`
+
+app.post("/location", async (req, res) => {
+  const location = await geoInfo(req.body.userLocation);
+  const formatted = await location.formatted;
+  console.log(location.components);
+  const neighborhood = location.components.neighbourhood
+    ? `\nAround the area of ${location.components.neighbourhood.toUpperCase()}`
     : "";
-  sendText(`Sasquatch spotted around:\n${formatted} ${neighborhood}`);
+  textBody = `Sasquatch spotted around:\n${formatted} ${neighborhood}`;
 });
+
+app.get("/send-text", (req, res) => {
+  console.log(`sendind text ${textBody}`)
+  sendText(textBody);
+});
+
+async function geoInfo(loc) {
+  const geoLocResponse = await fetch(
+    `https://api.opencagedata.com/geocode/v1/json?q=${loc.lat}%2C%20${loc.long}&key=${geocodeKey}&language=en&pretty=1`
+  );
+  const geoLoc = await geoLocResponse.json();
+  return geoLoc.results[0];
+}
 
 function sendText(text) {
   client.messages
