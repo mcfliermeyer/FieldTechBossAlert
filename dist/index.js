@@ -1,6 +1,6 @@
 const trackBtn = document.getElementById("track-btn");
-trackBtn.disabled = true
-trackBtn.innerText = "PLEASE WAIT Getting your location idiot"
+trackBtn.disabled = true;
+trackBtn.innerText = "PLEASE WAIT Getting your GPS location";
 
 //  get location upon page load which i think would be faster
 //  then button press sends location to server
@@ -8,14 +8,17 @@ trackBtn.innerText = "PLEASE WAIT Getting your location idiot"
 
 async function postLocationToServer() {
   navigator.geolocation.getCurrentPosition((location) => {
-    const latLong = {lat: location.coords.latitude, long: location.coords.longitude}
+    const latLong = {
+      lat: location.coords.latitude,
+      long: location.coords.longitude,
+    };
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userLocation: latLong }),
     };
     fetch("http://localhost:3001/location", options); //send location of user to server
-    trackBtn.disabled = false
+    trackBtn.disabled = false;
     trackBtn.innerText = "Send Sasquatch's Location";
   });
 }

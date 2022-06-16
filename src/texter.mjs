@@ -39,7 +39,7 @@ app.post("/location", async (req, res) => {
 });
 
 app.get("/send-text", (req, res) => {
-  console.log(`sendind text ${textBody}`)
+  console.log(`sendind text ${textBody}`);
   sendText(textBody);
 });
 
@@ -55,8 +55,8 @@ function sendText(text) {
   client.messages
     .create({
       body: text,
-      from: "+19285855151",
-      to: "+13307807602",
+      from: process.env.TWILIO_PHONE_NUMBER,
+      to: process.env.TEST_PHONE_NUMBER,
     })
     .then((message) => console.log(message.sid));
 }
